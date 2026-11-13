@@ -124,7 +124,7 @@
                 </form>
 
                 @if ($ajuste->estado === \App\Models\Ajuste::ESTADO_EN_PROGRESO)
-                    <div class="mt-4">
+                    <div class="flex items-center gap-3 mt-4">
                         <form method="POST" action="{{ route('ajustes.finalizar', $ajuste) }}" class="inline">
                             @csrf
                             <button type="submit"

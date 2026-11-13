@@ -249,7 +249,7 @@
                 </form>
 
                 @if ($compra->estado === \App\Models\Compra::ESTADO_EN_PROGRESO)
-                    <div class="mt-4">
+                    <div class="flex items-center gap-3 mt-4">
                         <form method="POST" action="{{ route('compras.finalizar', $compra) }}" class="inline">
                             @csrf
                             <button type="submit"
