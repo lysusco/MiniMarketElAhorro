@@ -72,13 +72,6 @@
                                                     {{ __('Modificar') }}
                                                 </a>
 
-                                                <form method="POST" action="{{ route('compras.finalizar', $compra) }}" class="inline ms-3">
-                                                    @csrf
-                                                    <button type="submit" class="text-green-300 hover:text-green-200 font-medium">
-                                                        {{ __('Finalizar') }}
-                                                    </button>
-                                                </form>
-
                                                 <form method="POST" action="{{ route('compras.inactivar', $compra) }}"
                                                       class="inline ms-3">
                                                     @csrf
