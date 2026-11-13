@@ -335,7 +335,7 @@
                         });
                     }
 
-                    this.current = { producto_id: '', producto_nombre: '', cantidad: 1, costo_unitario: 0 };
+                    this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
                 },
                 removeItem(index) {
                     this.items.splice(index, 1);
