@@ -16,7 +16,7 @@ class LoginTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->driver->manage()->deleteAllCookies();
             $browser->visit('/login')
-                ->type('email', 'admin@minimercado.com')
+                ->type('login', 'admin@minimercado.com')
                 ->type('password', 'admin123')
                 ->waitFor('button[type="submit"]')->click('button[type="submit"]')
                 ->assertPathIs('/dashboard')
@@ -32,7 +32,7 @@ class LoginTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->driver->manage()->deleteAllCookies();
             $browser->visit('/login')
-                ->type('email', 'empleado@minimercado.com')
+                ->type('login', 'empleado@minimercado.com')
                 ->type('password', 'empleado123')
                 ->waitFor('button[type="submit"]')->click('button[type="submit"]')
                 ->assertPathIs('/dashboard')
@@ -48,7 +48,7 @@ class LoginTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->driver->manage()->deleteAllCookies();
             $browser->visit('/login')
-                ->type('email', 'admin@minimercado.com')
+                ->type('login', 'admin@minimercado.com')
                 ->type('password', 'contraseña-incorrecta')
                 ->waitFor('button[type="submit"]')->click('button[type="submit"]')
                 ->assertPathIs('/login');
