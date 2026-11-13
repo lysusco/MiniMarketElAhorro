@@ -3,7 +3,7 @@
 <!-- Nombre -->
 <div>
     <x-input-label for="nombre" :value="__('Nombre')" />
-    <x-text-input id="nombre" name="nombre" type="text" class="block mt-1 w-full"
+    <x-input id="nombre" name="nombre" type="text" class="block mt-1 w-full"
                   :value="old('nombre', $categoria?->nombre)" required autofocus />
     <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
 </div>
@@ -11,7 +11,7 @@
 <!-- Descripción -->
 <div>
     <x-input-label for="descripcion" :value="__('Descripción')" />
-    <x-text-input id="descripcion" name="descripcion" type="text" class="block mt-1 w-full"
+    <x-input id="descripcion" name="descripcion" type="text" class="block mt-1 w-full"
                   :value="old('descripcion', $categoria?->descripcion)" />
     <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
 </div>

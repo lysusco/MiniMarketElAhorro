@@ -15,7 +15,7 @@
                     @include('categorias.form', ['categoria' => $categoria])
 
                     <div class="flex items-center gap-3">
-                        <x-primary-button>{{ __('Guardar cambios') }}</x-primary-button>
+                        <x-button-primary>{{ __('Guardar cambios') }}</x-button-primary>
                         <a href="{{ route('categorias.index') }}"
                            class="inline-flex items-center px-4 py-2 bg-bg-200 border border-bg-300 text-sm font-medium rounded-md text-text-100 hover:bg-bg-300">
                             {{ __('Cancelar') }}

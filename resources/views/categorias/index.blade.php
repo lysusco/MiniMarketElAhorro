@@ -19,10 +19,10 @@
 
                     <!-- Búsqueda -->
                     <form method="GET" action="{{ route('categorias.index') }}" class="flex flex-col sm:flex-row gap-2 mb-6">
-                        <x-text-input type="search" name="buscar" :value="request('buscar')"
+                        <x-input type="search" name="buscar" :value="request('buscar')"
                                       placeholder="{{ __('Buscar por nombre...') }}"
                                       class="w-full sm:max-w-xs" />
-                        <x-primary-button type="submit">{{ __('Buscar') }}</x-primary-button>
+                        <x-button-primary type="submit">{{ __('Buscar') }}</x-button-primary>
                         @if (request('buscar'))
                             <a href="{{ route('categorias.index') }}"
                                class="inline-flex items-center px-4 py-2 bg-bg-200 border border-bg-300 text-sm font-medium rounded-md text-text-100 hover:bg-bg-300">

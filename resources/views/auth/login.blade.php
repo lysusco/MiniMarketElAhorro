@@ -8,7 +8,7 @@
         <!-- Correo electrónico o cédula/NIT -->
         <div>
             <x-input-label for="login" :value="__('Correo electrónico o cédula/NIT')" />
-            <x-text-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required autofocus autocomplete="username" />
+            <x-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('login')" class="mt-2" />
         </div>
 
@@ -16,7 +16,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Contraseña')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
+            <x-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
@@ -39,9 +39,9 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-button-primary class="ms-3">
                 {{ __('Iniciar sesión') }}
-            </x-primary-button>
+            </x-button-primary>
         </div>
     </form>
 </x-guest-layout>

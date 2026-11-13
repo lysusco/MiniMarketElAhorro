@@ -1,1 +1,0 @@
-<x-button-danger {{ $attributes }}>{{ $slot }}</x-button-danger>

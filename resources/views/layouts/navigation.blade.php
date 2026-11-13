@@ -52,11 +52,11 @@
                                     {{ __('Categorías') }}
                                 </x-dropdown-link>
                             @endif
-                            <span class="block px-4 py-2 text-sm text-text-200">{{ __('Productos') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
-                            <span class="block px-4 py-2 text-sm text-text-200">{{ __('Proveedores') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
+                            <x-coming-soon>{{ __('Productos') }}</x-coming-soon>
+                            <x-coming-soon>{{ __('Proveedores') }}</x-coming-soon>
                             <div class="px-4 py-2 text-xs font-semibold text-text-200 uppercase">{{ __('Movimientos') }}</div>
-                            <span class="block px-4 py-2 text-sm text-text-200">{{ __('Entradas de mercancía') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
-                            <span class="block px-4 py-2 text-sm text-text-200">{{ __('Ajustes de inventario') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
+                            <x-coming-soon>{{ __('Entradas de mercancía') }}</x-coming-soon>
+                            <x-coming-soon>{{ __('Ajustes de inventario') }}</x-coming-soon>
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -74,8 +74,8 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <span class="block px-4 py-2 text-sm text-text-200">{{ __('Nueva venta') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
-                            <span class="block px-4 py-2 text-sm text-text-200">{{ __('Historial de ventas') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
+                            <x-coming-soon>{{ __('Nueva venta') }}</x-coming-soon>
+                            <x-coming-soon>{{ __('Historial de ventas') }}</x-coming-soon>
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -93,8 +93,8 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <span class="block px-4 py-2 text-sm text-text-200">{{ __('Clientes y crédito') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
-                            <span class="block px-4 py-2 text-sm text-text-200">{{ __('Registrar abono') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
+                            <x-coming-soon>{{ __('Clientes y crédito') }}</x-coming-soon>
+                            <x-coming-soon>{{ __('Registrar abono') }}</x-coming-soon>
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -114,9 +114,9 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <span class="block px-4 py-2 text-sm text-text-200">{{ __('Productos con stock bajo') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
-                                <span class="block px-4 py-2 text-sm text-text-200">{{ __('Ventas por fecha') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
-                                <span class="block px-4 py-2 text-sm text-text-200">{{ __('Cartera de clientes') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
+                                <x-coming-soon>{{ __('Productos con stock bajo') }}</x-coming-soon>
+                                <x-coming-soon>{{ __('Ventas por fecha') }}</x-coming-soon>
+                                <x-coming-soon>{{ __('Cartera de clientes') }}</x-coming-soon>
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -134,7 +134,7 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <span class="block px-4 py-2 text-sm text-text-200">{{ __('Usuarios y roles') }} <span class="text-xs">· {{ __('próximamente') }}</span></span>
+                                <x-coming-soon>{{ __('Usuarios y roles') }}</x-coming-soon>
                             </x-slot>
                         </x-dropdown>
                     </div>

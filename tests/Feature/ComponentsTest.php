@@ -53,10 +53,4 @@ class ComponentsTest extends TestCase
         $view->assertSee('Hola');
     }
 
-    public function test_aliases_delegate(): void
-    {
-        $view = $this->blade('<x-primary-button>Hola</x-primary-button>');
-        $view->assertSee('bg-primary-100');
-        $view->assertSee('Hola');
-    }
 }

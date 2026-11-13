@@ -1,1 +1,0 @@
-<x-button-secondary {{ $attributes }}>{{ $slot }}</x-button-secondary>
