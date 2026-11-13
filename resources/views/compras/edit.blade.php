@@ -45,13 +45,6 @@
                                 </template>
                             </ul>
 
-                            <div x-show="selected" x-cloak
-                                 class="mt-2 text-sm text-text-200 flex items-center gap-2">
-                                {{ __('Seleccionado:') }}
-                                <span class="text-text-100 font-medium" x-text="selected?.nombre"></span>
-                                <span x-text="selected?.nit ? ' (' + selected.nit + ')' : ''"></span>
-                            </div>
-
                             <x-input-error :messages="$errors->get('proveedor_id')" class="mt-2" />
 
                             <div id="proveedor-modal-edit" style="display:none;"

@@ -31,6 +31,12 @@
                                               d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
                                     </svg>
                                 </button>
+                                <button type="button" @click="selected = null; query = ''"
+                                        x-show="selected" x-cloak
+                                        class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80"
+                                        title="{{ __('Cambiar proveedor') }}">
+                                    {{ __('Cambiar') }}
+                                </button>
                             </div>
 
                             <!-- Autocompletado -->
@@ -44,18 +50,6 @@
                                     </li>
                                 </template>
                             </ul>
-
-                            <!-- Proveedor seleccionado -->
-                            <div x-show="selected" x-cloak
-                                 class="mt-2 text-sm text-text-200 flex items-center gap-2">
-                                {{ __('Seleccionado:') }}
-                                <span class="text-text-100 font-medium" x-text="selected?.nombre"></span>
-                                <span x-text="selected?.nit ? ' (' + selected.nit + ')' : ''"></span>
-                                <button type="button" @click="selected = null; query = ''"
-                                        class="text-accent-200 hover:text-text-100 text-xs font-medium">
-                                    {{ __('Cambiar') }}
-                                </button>
-                            </div>
 
                             <x-input-error :messages="$errors->get('proveedor_id')" class="mt-2" />
 
