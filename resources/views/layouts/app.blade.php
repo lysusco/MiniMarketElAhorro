@@ -31,7 +31,7 @@
             <main>
                 @if (session('success'))
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
-                        <div class="bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 text-sm">
+                        <div class="bg-green-500/15 text-green-300 border border-green-500/30 rounded-lg p-4 text-sm">
                             {{ session('success') }}
                         </div>
                     </div>
@@ -39,7 +39,7 @@
 
                 @if (session('error'))
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
-                        <div class="bg-red-50 border border-red-200 text-red-800 rounded-lg p-4 text-sm">
+                        <div class="bg-red-500/15 text-red-300 border border-red-500/30 rounded-lg p-4 text-sm">
                             {{ session('error') }}
                         </div>
                     </div>
