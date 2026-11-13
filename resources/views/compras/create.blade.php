@@ -344,15 +344,15 @@
         }
 
         function proveedorSelector(proveedores) {
+            const oldId = '{{ old('proveedor_id') }}';
+            const selected = oldId
+                ? (proveedores.find(p => String(p.id) === String(oldId)) || null)
+                : null;
             return {
                 proveedores: proveedores,
-                query: '',
+                query: selected ? (selected.nombre + (selected.nit ? ' - ' + selected.nit : '')) : '',
                 open: false,
-                selected: (function () {
-                    const oldId = '{{ old('proveedor_id') }}';
-                    if (!oldId) return null;
-                    return proveedores.find(p => String(p.id) === String(oldId)) || null;
-                })(),
+                selected: selected,
                 get filtered() {
                     if (!this.query) return [];
                     const q = this.query.toLowerCase();

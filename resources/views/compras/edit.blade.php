@@ -335,14 +335,14 @@
         }
 
         function proveedorSelector(proveedores, selectedId) {
+            const selected = selectedId
+                ? (proveedores.find(p => String(p.id) === String(selectedId)) || null)
+                : null;
             return {
                 proveedores: proveedores,
-                query: '',
+                query: selected ? (selected.nombre + (selected.nit ? ' - ' + selected.nit : '')) : '',
                 open: false,
-                selected: (function () {
-                    if (!selectedId) return null;
-                    return proveedores.find(p => String(p.id) === String(selectedId)) || null;
-                })(),
+                selected: selected,
                 get filtered() {
                     if (!this.query) return [];
                     const q = this.query.toLowerCase();
