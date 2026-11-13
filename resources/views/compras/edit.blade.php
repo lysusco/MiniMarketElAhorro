@@ -241,21 +241,24 @@
                                 class="inline-flex items-center px-4 py-2 bg-primary-100 text-text-100 text-sm font-medium rounded-md hover:bg-primary-200">
                             {{ __('Guardar cambios') }}
                         </button>
-                        @if ($compra->estado === \App\Models\Compra::ESTADO_EN_PROGRESO)
-                            <form method="POST" action="{{ route('compras.finalizar', $compra) }}" class="inline">
-                                @csrf
-                                <button type="submit"
-                                        class="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-500">
-                                    {{ __('Finalizar') }}
-                                </button>
-                            </form>
-                        @endif
                         <a href="{{ route('compras.index') }}"
                            class="inline-flex items-center px-4 py-2 bg-bg-200 border border-bg-300 text-sm font-medium rounded-md text-text-100 hover:bg-bg-300">
                             {{ __('Volver') }}
                         </a>
                     </div>
                 </form>
+
+                @if ($compra->estado === \App\Models\Compra::ESTADO_EN_PROGRESO)
+                    <div class="mt-4">
+                        <form method="POST" action="{{ route('compras.finalizar', $compra) }}" class="inline">
+                            @csrf
+                            <button type="submit"
+                                    class="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-500">
+                                {{ __('Finalizar') }}
+                            </button>
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
