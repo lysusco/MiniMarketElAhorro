@@ -47,6 +47,7 @@ class ClienteSeeder extends Seeder
             $usuario = User::create([
                 'name' => $datos['nombre'],
                 'email' => $correo,
+                'identificacion' => $datos['identificacion'],
                 'password' => 'cliente123',
                 'role' => User::ROLE_CLIENTE,
                 'activo' => true,
