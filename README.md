@@ -73,7 +73,7 @@ El prototipo estará orientado a un solo local y cubrirá las operaciones princi
 | Ajustes de inventario por daño, vencimiento o pérdida. | Administración de varias sedes o bodegas. |
 | Ventas de contado y fiadas que descuentan existencias. | Contabilidad, impuestos y nómina. |
 | Clientes con límite de crédito y registro de abonos. | Aplicación móvil nativa. |
-| Roles de administrador y empleado. | Integración automática con proveedores reales. |
+| Roles de administrador, empleado y cliente (este último de solo consulta). | Integración automática con proveedores reales. |
 | Reportes de stock bajo, ventas y cartera. | Lectores físicos de códigos de barras. |
 | Historial de movimientos de inventario. | Comercio electrónico o ventas por internet. |
 
@@ -104,7 +104,7 @@ El sistema tendrá dos roles de usuario: administrador y empleado. Los permisos 
 | Consultar reportes de ventas y cartera. | Sí | No |
 | Gestionar usuarios y roles. | Sí | No |
 
-**Cliente:** no inicia sesión ni utiliza directamente la aplicación. Es una entidad cuyos datos son registrados y consultados por el personal del minimercado.
+**Cliente:** inicia sesión con rol de solo consulta. Puede ver su panel de crédito, el catálogo de productos, sus ventas y sus abonos. No registra ventas, abonos ni operaciones de inventario, ni modifica precios, stock o límites de crédito.
 
 ## 3.2. Requerimientos funcionales
 

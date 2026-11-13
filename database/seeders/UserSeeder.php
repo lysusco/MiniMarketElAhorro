@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Administrador',
             'email' => 'admin@minimercado.com',
+            'identificacion' => '1000000001',
             'password' => 'admin123',
             'role' => User::ROLE_ADMIN,
             'activo' => true,
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Empleado',
             'email' => 'empleado@minimercado.com',
+            'identificacion' => '1000000002',
             'password' => 'empleado123',
             'role' => User::ROLE_EMPLEADO,
             'activo' => true,

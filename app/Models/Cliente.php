@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cliente extends Model
@@ -16,6 +17,7 @@ class Cliente extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'user_id',
         'nombre',
         'identificacion',
         'telefono',
@@ -41,8 +43,12 @@ class Cliente extends Model
     }
 
     /**
-     * Ventas realizadas al cliente.
+     * Cuenta de usuario asociada (cuando el cliente inicia sesión).
      */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     public function ventas(): HasMany
     {
         return $this->hasMany(Venta::class);

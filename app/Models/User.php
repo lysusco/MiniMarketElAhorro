@@ -6,6 +6,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -19,6 +20,7 @@ class User extends Authenticatable
      */
     public const ROLE_ADMIN = 'admin';
     public const ROLE_EMPLEADO = 'empleado';
+    public const ROLE_CLIENTE = 'cliente';
 
     /**
      * Los atributos que se pueden asignar masivamente.
@@ -28,6 +30,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'identificacion',
         'password',
         'role',
         'activo',
@@ -63,6 +66,22 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
+    }
+
+    /**
+     * Indica si el usuario es cliente.
+     */
+    public function isCliente(): bool
+    {
+        return $this->role === self::ROLE_CLIENTE;
+    }
+
+    /**
+     * Cliente asociado a la cuenta (solo rol cliente).
+     */
+    public function cliente(): HasOne
+    {
+        return $this->hasOne(Cliente::class);
     }
 
     /**

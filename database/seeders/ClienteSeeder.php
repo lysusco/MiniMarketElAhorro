@@ -3,14 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\Cliente;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ClienteSeeder extends Seeder
 {
     /**
-     * Crea los clientes iniciales con su límite de crédito.
-     * El saldo inicia en 0: aumenta con las ventas fiadas y disminuye
-     * con los abonos (decisión de diseño del documento).
+     * Crea los clientes iniciales con su límite de crédito y una cuenta
+     * de usuario con rol cliente para que puedan consultar su información.
      */
     public function run(): void
     {
@@ -41,8 +41,22 @@ class ClienteSeeder extends Seeder
             ],
         ];
 
-        foreach ($clientes as $cliente) {
-            Cliente::create($cliente + ['saldo' => 0, 'activo' => true]);
+        foreach ($clientes as $datos) {
+            $correo = $datos['correo'] ?: strtolower(str_replace(' ', '.', $datos['nombre'])) . '@cliente.minimercado.com';
+
+            $usuario = User::create([
+                'name' => $datos['nombre'],
+                'email' => $correo,
+                'password' => 'cliente123',
+                'role' => User::ROLE_CLIENTE,
+                'activo' => true,
+            ]);
+
+            Cliente::create($datos + [
+                'user_id' => $usuario->id,
+                'saldo' => 0,
+                'activo' => true,
+            ]);
         }
     }
 }

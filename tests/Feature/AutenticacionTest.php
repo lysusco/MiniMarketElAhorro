@@ -23,7 +23,23 @@ class AutenticacionTest extends TestCase
         ]);
 
         $this->post('/login', [
-            'email' => $user->email,
+            'login' => $user->email,
+            'password' => 'secret123',
+        ])->assertRedirect(route('dashboard'));
+
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_un_usuario_puede_iniciar_sesion_con_cedula(): void
+    {
+        $user = User::factory()->create([
+            'password' => 'secret123',
+            'role' => User::ROLE_EMPLEADO,
+            'identificacion' => '1234567890',
+        ]);
+
+        $this->post('/login', [
+            'login' => '1234567890',
             'password' => 'secret123',
         ])->assertRedirect(route('dashboard'));
 
@@ -38,9 +54,9 @@ class AutenticacionTest extends TestCase
         ]);
 
         $this->post('/login', [
-            'email' => $user->email,
+            'login' => $user->email,
             'password' => 'contraseña-incorrecta',
-        ])->assertSessionHasErrors('email');
+        ])->assertSessionHasErrors('login');
 
         $this->assertGuest();
     }
