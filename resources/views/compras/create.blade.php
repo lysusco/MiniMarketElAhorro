@@ -23,8 +23,8 @@
                                        placeholder="{{ __('Buscar por NIT o nombre...') }}"
                                        class="bg-bg-100 border-bg-300 text-text-100 focus:border-accent-200 focus:ring-accent-200 rounded-md shadow-sm w-full disabled:opacity-50 disabled:cursor-not-allowed" />
                                 <button type="button" onclick="document.getElementById('proveedor-modal').style.display='flex'"
-                                        :disabled="!!selected"
-                                        class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        x-show="!selected"
+                                        class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80"
                                         title="{{ __('Listar proveedores') }}">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -100,18 +100,24 @@
                                 <label class="block text-xs text-text-200 mb-1">{{ __('Producto') }}</label>
 
                                 <div class="flex gap-2">
-                                    <input type="text" x-model="productoQuery" @input=""
+                                    <input type="text" x-model="productoQuery"
                                            :disabled="!!current.producto_id"
                                            placeholder="{{ __('Buscar por nombre o código...') }}"
                                            class="bg-bg-100 border-bg-300 text-text-100 focus:border-accent-200 focus:ring-accent-200 rounded-md shadow-sm w-full disabled:opacity-50 disabled:cursor-not-allowed" />
                                     <button type="button" onclick="document.getElementById('producto-modal').style.display='flex'"
-                                            :disabled="!!current.producto_id"
-                                            class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            x-show="!current.producto_id"
+                                            class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80"
                                             title="{{ __('Listar productos') }}">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                   d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
                                         </svg>
+                                    </button>
+                                    <button type="button" @click="cambiarProducto()"
+                                            x-show="current.producto_id" x-cloak
+                                            class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80"
+                                            title="{{ __('Cambiar producto') }}">
+                                        {{ __('Cambiar') }}
                                     </button>
                                 </div>
 
@@ -125,16 +131,6 @@
                                         </li>
                                     </template>
                                 </ul>
-
-                                <div x-show="current.producto_id" x-cloak
-                                     class="mt-2 text-sm text-text-200 flex items-center gap-2">
-                                    {{ __('Seleccionado:') }}
-                                    <span class="text-text-100 font-medium" x-text="current.producto_nombre"></span>
-                                    <button type="button" @click="cambiarProducto()"
-                                            class="text-accent-200 hover:text-text-100 text-xs font-medium">
-                                        {{ __('Cambiar') }}
-                                    </button>
-                                </div>
 
                                 <div id="producto-modal" style="display:none;"
                                      class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
@@ -310,7 +306,7 @@
                 seleccionarProducto(p) {
                     this.current.producto_id = p.id;
                     this.current.producto_nombre = p.nombre;
-                    this.productoQuery = '';
+                    this.productoQuery = p.nombre + (p.codigo ? ' - ' + p.codigo : '');
                     this.productoOpen = false;
                 },
                 cambiarProducto() {
@@ -374,7 +370,7 @@
                 filtrar() {},
                 seleccionar(p) {
                     this.selected = p;
-                    this.query = '';
+                    this.query = p.nombre + (p.nit ? ' - ' + p.nit : '');
                 }
             };
         }

@@ -24,8 +24,8 @@
                                        placeholder="{{ __('Buscar por NIT o nombre...') }}"
                                        class="bg-bg-100 border-bg-300 text-text-100 focus:border-accent-200 focus:ring-accent-200 rounded-md shadow-sm w-full disabled:opacity-50 disabled:cursor-not-allowed" />
                                 <button type="button" onclick="document.getElementById('proveedor-modal-edit').style.display='flex'"
-                                        :disabled="!!selected"
-                                        class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        x-show="!selected"
+                                        class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80"
                                         title="{{ __('Listar proveedores') }}">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -92,13 +92,65 @@
                         <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end bg-bg-300/30 p-3 rounded-md mb-4">
                             <div class="sm:col-span-2">
                                 <label class="block text-xs text-text-200 mb-1">{{ __('Producto') }}</label>
-                                <select x-model="current.producto_id"
-                                        class="bg-bg-100 border-bg-300 text-text-100 focus:border-accent-200 focus:ring-accent-200 rounded-md shadow-sm w-full">
-                                    <option value="">{{ __('Seleccione') }}</option>
-                                    @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}">{{ $producto->nombre }} ({{ $producto->codigo }})</option>
-                                    @endforeach
-                                </select>
+
+                                <div class="flex gap-2">
+                                    <input type="text" x-model="productoQuery"
+                                           :disabled="!!current.producto_id"
+                                           placeholder="{{ __('Buscar por nombre o código...') }}"
+                                           class="bg-bg-100 border-bg-300 text-text-100 focus:border-accent-200 focus:ring-accent-200 rounded-md shadow-sm w-full disabled:opacity-50 disabled:cursor-not-allowed" />
+                                    <button type="button" onclick="document.getElementById('producto-modal-edit').style.display='flex'"
+                                            x-show="!current.producto_id"
+                                            class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80"
+                                            title="{{ __('Listar productos') }}">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+                                        </svg>
+                                    </button>
+                                    <button type="button" @click="cambiarProducto()"
+                                            x-show="current.producto_id" x-cloak
+                                            class="px-3 bg-bg-300 text-text-100 rounded-md hover:bg-bg-300/80"
+                                            title="{{ __('Cambiar producto') }}">
+                                        {{ __('Cambiar') }}
+                                    </button>
+                                </div>
+
+                                <ul x-show="productoQuery && filteredProductos.length" x-cloak
+                                    class="mt-1 bg-bg-100 border border-bg-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
+                                    <template x-for="p in filteredProductos" :key="p.id">
+                                        <li @click="seleccionarProducto(p)"
+                                            class="px-3 py-2 text-sm text-text-100 hover:bg-bg-300 cursor-pointer">
+                                            <span x-text="p.nombre"></span>
+                                            <span class="text-text-200" x-text="p.codigo ? ' - ' + p.codigo : ''"></span>
+                                        </li>
+                                    </template>
+                                </ul>
+
+                                <div id="producto-modal-edit" style="display:none;"
+                                     class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+                                     onclick="if(event.target===this)this.style.display='none'">
+                                    <div class="bg-bg-200 border border-bg-300 rounded-lg shadow-xl p-6 w-full max-w-md mx-auto max-h-[80vh] overflow-y-auto">
+                                        <h3 class="text-text-100 font-semibold mb-4">{{ __('Seleccionar producto') }}</h3>
+                                        <input type="text" placeholder="{{ __('Buscar...') }}"
+                                               class="bg-bg-100 border-bg-300 text-text-100 rounded-md shadow-sm w-full mb-3"
+                                               @input="productoQuery = $event.target.value" />
+                                        <ul class="space-y-2">
+                                            <template x-for="p in (productoQuery ? filteredProductos : productos)" :key="p.id">
+                                                <li @click="seleccionarProducto(p); document.getElementById('producto-modal-edit').style.display='none'"
+                                                    class="px-3 py-2 rounded-md hover:bg-bg-300 cursor-pointer">
+                                                    <div class="text-text-100 font-medium" x-text="p.nombre"></div>
+                                                    <div class="text-text-200 text-sm" x-text="p.codigo"></div>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                        <div class="mt-4 flex justify-center">
+                                            <button type="button" onclick="document.getElementById('producto-modal-edit').style.display='none'"
+                                                    class="px-4 py-2 bg-bg-300 text-text-100 text-sm font-medium rounded-md hover:bg-bg-300/80">
+                                                {{ __('Cerrar') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs text-text-200 mb-1">{{ __('Cantidad') }}</label>
@@ -226,13 +278,34 @@
         function compraForm(productos, items) {
             return {
                 productos: productos,
-                current: { producto_id: '', cantidad: 1, costo_unitario: 0 },
+                current: { producto_id: '', producto_nombre: '', cantidad: 1, costo_unitario: 0 },
                 items: (items || []).map(i => ({
                     producto_id: i.producto_id,
                     producto_nombre: i.producto_nombre || '',
                     cantidad: Number(i.cantidad) || 1,
                     costo_unitario: Number(i.costo_unitario) || 0,
                 })),
+                productoQuery: '',
+                productoOpen: false,
+                get filteredProductos() {
+                    if (!this.productoQuery) return [];
+                    const q = this.productoQuery.toLowerCase();
+                    return this.productos.filter(p =>
+                        (p.nombre || '').toLowerCase().includes(q) ||
+                        (p.codigo || '').toLowerCase().includes(q)
+                    );
+                },
+                seleccionarProducto(p) {
+                    this.current.producto_id = p.id;
+                    this.current.producto_nombre = p.nombre;
+                    this.productoQuery = p.nombre + (p.codigo ? ' - ' + p.codigo : '');
+                    this.productoOpen = false;
+                },
+                cambiarProducto() {
+                    this.current.producto_id = '';
+                    this.current.producto_nombre = '';
+                    this.productoQuery = '';
+                },
                 addItem() {
                     const proveedorId = document.querySelector('input[name="proveedor_id"]')?.value;
                     if (!proveedorId) {
@@ -241,7 +314,6 @@
                     }
                     if (!this.current.producto_id) return;
 
-                    const prod = this.productos.find(p => String(p.id) === String(this.current.producto_id));
                     const cantidad = Number(this.current.cantidad) || 1;
                     const costo = Number(this.current.costo_unitario) || 0;
 
@@ -255,7 +327,7 @@
                     } else {
                         this.items.push({
                             producto_id: this.current.producto_id,
-                            producto_nombre: prod ? prod.nombre : '',
+                            producto_nombre: this.current.producto_nombre,
                             cantidad: cantidad,
                             costo_unitario: costo,
                         });
@@ -289,7 +361,7 @@
                 filtrar() {},
                 seleccionar(p) {
                     this.selected = p;
-                    this.query = '';
+                    this.query = p.nombre + (p.nit ? ' - ' + p.nit : '');
                 }
             };
         }
