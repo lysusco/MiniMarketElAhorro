@@ -15,18 +15,21 @@ class ProveedorSeeder extends Seeder
         $proveedores = [
             [
                 'nombre' => 'Distribuidora La Sabana',
+                'nit' => '900123456-1',
                 'telefono' => '607 651 2345',
                 'correo' => 'ventas@distritolasa.com',
                 'direccion' => 'Cra. 18 # 32-45, Bucaramanga',
             ],
             [
                 'nombre' => 'Alimentos del Oriente',
+                'nit' => '900234567-2',
                 'telefono' => '607 697 8890',
                 'correo' => 'pedidos@alimentosdeloriente.com',
                 'direccion' => 'Cl. 20 # 12-08, Floridablanca',
             ],
             [
                 'nombre' => 'Aseo Total S.A.S.',
+                'nit' => '900345678-3',
                 'telefono' => '607 643 1122',
                 'correo' => 'comercial@aseototal.com',
                 'direccion' => 'Aut. Girón km 4, Girón',

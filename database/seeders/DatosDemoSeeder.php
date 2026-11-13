@@ -54,7 +54,7 @@ class DatosDemoSeeder extends Seeder
                 'user_id' => $user->id,
                 'fecha' => $fecha,
                 'total' => 0,
-                'estado' => 'registrada',
+                'estado' => Compra::ESTADO_ACTIVO,
             ]);
 
             $cantidades = [

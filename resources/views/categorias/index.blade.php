@@ -60,15 +60,8 @@
                                                 {{ __('Editar') }}
                                             </a>
 
-                                            <form method="POST" action="{{ route('categorias.destroy', $categoria) }}"
-                                                  class="inline ms-3"
-                                                  onsubmit="return confirm('{{ __('¿Estás seguro de eliminar esta categoría?') }}');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-400 hover:text-red-300 font-medium">
-                                                    {{ __('Eliminar') }}
-                                                </button>
-                                            </form>
+                                            <x-delete-button :action="route('categorias.destroy', $categoria)"
+                                                             :message="__('¿Estás seguro de eliminar esta categoría?')" />
                                         </td>
                                     </tr>
                                 @empty

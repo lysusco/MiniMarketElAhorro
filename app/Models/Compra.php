@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Compra extends Model
 {
+    public const ESTADO_EN_PROGRESO = 'en_progreso';
+    public const ESTADO_INACTIVO = 'inactivo';
+    public const ESTADO_ACTIVO = 'activo';
     use HasFactory;
 
     /**
@@ -22,6 +25,7 @@ class Compra extends Model
         'fecha',
         'total',
         'estado',
+        'motivo',
     ];
 
     /**

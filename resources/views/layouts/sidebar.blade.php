@@ -49,9 +49,21 @@
                     <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.*')">
                         <span class="truncate" x-show="!collapsed">Categorías</span>
                     </x-responsive-nav-link>
-                    <x-coming-soon x-show="!collapsed">Productos</x-coming-soon>
-                    <x-coming-soon x-show="!collapsed">Proveedores</x-coming-soon>
-                    <x-coming-soon x-show="!collapsed">Entradas y ajustes</x-coming-soon>
+                    <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
+                        <span class="truncate" x-show="!collapsed">Productos</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('proveedores.index')" :active="request()->routeIs('proveedores.*')">
+                        <span class="truncate" x-show="!collapsed">Proveedores</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('compras.index')" :active="request()->routeIs('compras.*')">
+                        <span class="truncate" x-show="!collapsed">Entradas</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('ajustes.index')" :active="request()->routeIs('ajustes.*')">
+                        <span class="truncate" x-show="!collapsed">Ajustes</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('movimientos.index')" :active="request()->routeIs('movimientos.*')">
+                        <span class="truncate" x-show="!collapsed">Movimientos</span>
+                    </x-responsive-nav-link>
                 </div>
 
                 <div>
