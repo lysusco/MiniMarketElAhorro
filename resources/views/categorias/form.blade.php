@@ -20,11 +20,11 @@
 <div>
     <label for="activo" class="inline-flex items-center">
         <input id="activo" type="checkbox" name="activo" value="1"
-               class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+               class="rounded border-bg-300 bg-bg-100 text-primary-100 shadow-sm focus:ring-primary-300"
                @checked(old('activo', $categoria?->activo ?? true))>
-        <span class="ms-2 text-sm text-gray-600">{{ __('Categoría activa') }}</span>
+        <span class="ms-2 text-sm text-text-200">{{ __('Categoría activa') }}</span>
     </label>
-    <p class="mt-1 text-xs text-gray-400">
+    <p class="mt-1 text-xs text-text-200">
         {{ __('Las categorías inactivas no estarán disponibles para nuevos productos.') }}
     </p>
 </div>

@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-text-100 leading-tight">
             {{ __('Nueva categoría') }}
         </h2>
     </x-slot>
 
     <div class="py-8">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-bg-200 border border-bg-300 overflow-hidden shadow-sm sm:rounded-lg">
                 <form method="POST" action="{{ route('categorias.store') }}" class="p-6 space-y-6">
                     @csrf
 
@@ -16,7 +16,7 @@
                     <div class="flex items-center gap-3">
                         <x-primary-button>{{ __('Guardar') }}</x-primary-button>
                         <a href="{{ route('categorias.index') }}"
-                           class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50">
+                           class="inline-flex items-center px-4 py-2 bg-bg-200 border border-bg-300 text-sm font-medium rounded-md text-text-100 hover:bg-bg-300">
                             {{ __('Cancelar') }}
                         </a>
                     </div>
