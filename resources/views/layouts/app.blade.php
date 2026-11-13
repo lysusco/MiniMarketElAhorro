@@ -14,39 +14,46 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-text-100 antialiased bg-bg-100">
-        <div class="min-h-screen bg-bg-100">
-            @include('layouts.navigation')
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-bg-100 flex">
+            @include('layouts.sidebar')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-bg-200 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-text-100">
-                        {{ $header }}
+            <div class="flex-1 flex flex-col min-w-0">
+                <!-- Topbar -->
+                <header class="h-16 bg-bg-200 border-b border-bg-300 flex items-center px-4 sm:px-6 gap-4 shrink-0">
+                    @isset($header)
+                        <div class="text-base font-semibold text-text-100 truncate">
+                            {{ $header }}
+                        </div>
+                    @endisset
+                    <div class="ms-auto flex items-center gap-3 text-sm text-text-200">
+                        <span class="hidden sm:inline">{{ Auth::user()->email }}</span>
                     </div>
                 </header>
-            @endisset
 
-            <!-- Page Content -->
-            <main>
-                @if (session('success'))
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
-                        <div class="bg-green-500/15 text-green-300 border border-green-500/30 rounded-lg p-4 text-sm">
-                            {{ session('success') }}
+                <!-- Page Content -->
+                <main class="flex-1 overflow-y-auto">
+                    @if (session('success'))
+                        <div class="px-4 sm:px-6 lg:px-8 mt-4">
+                            <div class="bg-green-500/15 border border-green-500/30 text-green-300 rounded-lg p-4 text-sm">
+                                {{ session('success') }}
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
 
-                @if (session('error'))
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
-                        <div class="bg-red-500/15 text-red-300 border border-red-500/30 rounded-lg p-4 text-sm">
-                            {{ session('error') }}
+                    @if (session('error'))
+                        <div class="px-4 sm:px-6 lg:px-8 mt-4">
+                            <div class="bg-red-500/15 border border-red-500/30 text-red-300 rounded-lg p-4 text-sm">
+                                {{ session('error') }}
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
 
-                {{ $slot }}
-            </main>
+                    <div class="p-4 sm:p-6 lg:p-8">
+                        {{ $slot }}
+                    </div>
+                </main>
+            </div>
         </div>
     </body>
 </html>
