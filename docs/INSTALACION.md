@@ -88,14 +88,29 @@ inventario, registrar ventas de contado y fiadas y gestionar el crédito de los 
 
 ## Pruebas
 
-El proyecto incluye pruebas automatizadas de autenticación, roles y del módulo de categorías
-(cada integrante escribirá pruebas para el módulo de su compañero):
+El proyecto incluye dos niveles de pruebas:
+
+**PHPUnit (integración, rápidas):** autenticación, roles y categorías.
 
 ```
 php artisan test
 ```
 
-Las pruebas se ejecutan sobre una base de datos SQLite en memoria y no afectan los datos de desarrollo.
+**Laravel Dusk (navegador, end-to-end):** login, permisos y CRUD de categorías
+ejecutándose en un navegador real (Chrome, en modo headless por defecto).
+
+```
+php artisan dusk
+```
+
+Requisitos para Dusk: Google Chrome instalado y MySQL en ejecución
+(la aplicación se sirve automáticamente en `http://127.0.0.1:8000`).
+Para ver el navegador durante la ejecución (útil para la sustentación),
+ejecuta con la variable de entorno `DUSK_HEADLESS_DISABLED=true`.
+
+Las pruebas se ejecutan sobre una base de datos SQLite en memoria (PHPUnit)
+o sobre la base de datos de desarrollo con limpieza automática (Dusk),
+y no afectan los datos de desarrollo.
 
 ## Estructura del proyecto
 
