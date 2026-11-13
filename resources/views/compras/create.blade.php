@@ -312,12 +312,32 @@
                     const proveedorId = document.querySelector('input[name="proveedor_id"]')?.value;
                     if (!proveedorId) {
                         mostrarError('{{ __('Debe seleccionar un proveedor activo antes de agregar productos.') }}');
+                        this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                        this.productoQuery = '';
                         return;
                     }
-                    if (!this.current.producto_id) return;
+                    if (!this.current.producto_id) {
+                        mostrarError('{{ __('Debe seleccionar un producto antes de agregarlo.') }}');
+                        this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                        this.productoQuery = '';
+                        return;
+                    }
 
-                    const cantidad = Number(this.current.cantidad) || 1;
+                    const cantidad = Number(this.current.cantidad) || 0;
                     const costo = Number(this.current.costo_unitario) || 0;
+
+                    if (cantidad <= 0) {
+                        mostrarError('{{ __('La cantidad debe ser mayor que cero.') }}');
+                        this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                        this.productoQuery = '';
+                        return;
+                    }
+                    if (costo <= 0) {
+                        mostrarError('{{ __('El costo unitario debe ser mayor que cero.') }}');
+                        this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                        this.productoQuery = '';
+                        return;
+                    }
 
                     const existente = this.items.find(i =>
                         String(i.producto_id) === String(this.current.producto_id) &&
@@ -336,6 +356,7 @@
                     }
 
                     this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                    this.productoQuery = '';
                 },
                 removeItem(index) {
                     this.items.splice(index, 1);

@@ -236,6 +236,28 @@
                         </div>
                     </div>
 
+                    <div id="error-modal" style="display:none;"
+                         class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+                         onclick="if(event.target===this)this.style.display='none'">
+                        <div class="bg-bg-200 border border-bg-300 rounded-lg shadow-xl p-6 w-full max-w-xs mx-auto">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-red-500/15 flex items-center justify-center">
+                                    <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p id="error-modal-msg" class="text-text-100 text-center mb-4"></p>
+                            <div class="flex justify-center">
+                                <button type="button" onclick="document.getElementById('error-modal').style.display='none'"
+                                        class="px-4 py-2 bg-bg-300 text-text-100 text-sm font-medium rounded-md hover:bg-bg-300/80">
+                                    {{ __('Cerrar') }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="flex items-center gap-3">
                         <button type="submit" name="finalizar" value="0"
                                 class="inline-flex items-center px-4 py-2 bg-primary-100 text-text-100 text-sm font-medium rounded-md hover:bg-primary-200">
@@ -306,12 +328,32 @@
                     const proveedorId = document.querySelector('input[name="proveedor_id"]')?.value;
                     if (!proveedorId) {
                         mostrarError('{{ __('Debe seleccionar un proveedor activo antes de agregar productos.') }}');
+                        this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                        this.productoQuery = '';
                         return;
                     }
-                    if (!this.current.producto_id) return;
+                    if (!this.current.producto_id) {
+                        mostrarError('{{ __('Debe seleccionar un producto antes de agregarlo.') }}');
+                        this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                        this.productoQuery = '';
+                        return;
+                    }
 
-                    const cantidad = Number(this.current.cantidad) || 1;
+                    const cantidad = Number(this.current.cantidad) || 0;
                     const costo = Number(this.current.costo_unitario) || 0;
+
+                    if (cantidad <= 0) {
+                        mostrarError('{{ __('La cantidad debe ser mayor que cero.') }}');
+                        this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                        this.productoQuery = '';
+                        return;
+                    }
+                    if (costo <= 0) {
+                        mostrarError('{{ __('El costo unitario debe ser mayor que cero.') }}');
+                        this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                        this.productoQuery = '';
+                        return;
+                    }
 
                     const existente = this.items.find(i =>
                         String(i.producto_id) === String(this.current.producto_id) &&
@@ -330,6 +372,7 @@
                     }
 
                     this.current = { producto_id: '', producto_nombre: '', cantidad: '', costo_unitario: '' };
+                    this.productoQuery = '';
                 },
                 removeItem(index) {
                     this.items.splice(index, 1);
