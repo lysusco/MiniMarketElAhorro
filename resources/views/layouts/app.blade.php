@@ -35,7 +35,7 @@
                 <main class="flex-1 overflow-y-auto">
                     @if (session('success'))
                         <div class="px-4 sm:px-6 lg:px-8 mt-4">
-                            <div class="bg-green-500/15 border border-green-500/30 text-green-300 rounded-lg p-4 text-sm">
+                            <div class="bg-green-500/15 border border-green-500/30 text-green-700 rounded-lg p-4 text-sm">
                                 {{ session('success') }}
                             </div>
                         </div>
@@ -43,7 +43,7 @@
 
                     @if (session('error'))
                         <div class="px-4 sm:px-6 lg:px-8 mt-4">
-                            <div class="bg-red-500/15 border border-red-500/30 text-red-300 rounded-lg p-4 text-sm">
+                            <div class="bg-red-500/15 border border-red-500/30 text-red-700 rounded-lg p-4 text-sm">
                                 {{ session('error') }}
                             </div>
                         </div>

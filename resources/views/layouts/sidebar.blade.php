@@ -68,21 +68,34 @@
 
                 <div>
                     <p x-show="!collapsed" class="px-2 mb-1 text-[11px] uppercase tracking-wider text-text-200">Ventas</p>
-                    <x-coming-soon x-show="!collapsed">Nueva venta</x-coming-soon>
-                    <x-coming-soon x-show="!collapsed">Historial</x-coming-soon>
+                    <x-responsive-nav-link :href="route('ventas.create')" :active="request()->routeIs('ventas.create')">
+                        <span class="truncate" x-show="!collapsed">Nueva venta</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index', 'ventas.show')">
+                        <span class="truncate" x-show="!collapsed">Historial</span>
+                    </x-responsive-nav-link>
                 </div>
 
                 <div>
                     <p x-show="!collapsed" class="px-2 mb-1 text-[11px] uppercase tracking-wider text-text-200">Clientes</p>
-                    <x-coming-soon x-show="!collapsed">Clientes y crédito</x-coming-soon>
-                    <x-coming-soon x-show="!collapsed">Registrar abono</x-coming-soon>
+                    <x-responsive-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
+                        <span class="truncate" x-show="!collapsed">Clientes y crédito</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('abonos.create')" :active="request()->routeIs('abonos.*')">
+                        <span class="truncate" x-show="!collapsed">Registrar abono</span>
+                    </x-responsive-nav-link>
                 </div>
             @endunless
 
             @if ($user?->isAdmin())
                 <div>
                     <p x-show="!collapsed" class="px-2 mb-1 text-[11px] uppercase tracking-wider text-text-200">Sistema</p>
-                    <x-coming-soon x-show="!collapsed">Reportes</x-coming-soon>
+                    <x-responsive-nav-link :href="route('reportes.ventas')" :active="request()->routeIs('reportes.ventas')">
+                        <span class="truncate" x-show="!collapsed">Reportes de ventas</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('reportes.cartera')" :active="request()->routeIs('reportes.cartera')">
+                        <span class="truncate" x-show="!collapsed">Cartera</span>
+                    </x-responsive-nav-link>
                     <x-coming-soon x-show="!collapsed">Usuarios y roles</x-coming-soon>
                 </div>
             @endif

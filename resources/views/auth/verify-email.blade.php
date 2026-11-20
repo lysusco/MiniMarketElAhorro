@@ -7,7 +7,7 @@
         </div>
 
         @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 bg-green-500/15 border border-green-500/30 text-green-300 rounded-lg p-4 text-sm">
+            <div class="mb-4 bg-green-500/15 border border-green-500/30 text-green-700 rounded-lg p-4 text-sm">
                 {{ __('Se ha enviado un nuevo enlace de verificación a tu correo.') }}
             </div>
         @endif

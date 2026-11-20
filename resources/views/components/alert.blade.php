@@ -3,10 +3,10 @@
 @php
 $type = $variant ?? $type ?? 'info';
 $alertClasses = match ($type) {
-    'success', 'green' => 'bg-green-500/15 text-green-300 border border-green-500/30',
-    'error', 'danger', 'red' => 'bg-red-500/15 text-red-300 border border-red-500/30',
-    'warning', 'amber' => 'bg-amber-500/15 text-amber-300 border border-amber-500/30',
-    default => 'bg-blue-500/15 text-blue-300 border border-blue-500/30',
+    'success', 'green' => 'bg-green-500/15 text-green-700 border border-green-500/30',
+    'error', 'danger', 'red' => 'bg-red-500/15 text-red-700 border border-red-500/30',
+    'warning', 'amber' => 'bg-amber-500/15 text-amber-700 border border-amber-500/30',
+    default => 'bg-blue-500/15 text-blue-700 border border-blue-500/30',
 };
 @endphp
 

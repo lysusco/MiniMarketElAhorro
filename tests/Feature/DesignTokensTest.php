@@ -10,7 +10,7 @@ class DesignTokensTest extends TestCase
     {
         $config = file_get_contents(base_path('tailwind.config.js'));
         $this->assertStringContainsString("'bg'", $config);
-        $this->assertStringContainsString("'#0F1C2E'", $config);
+        $this->assertStringContainsString("'#fffefb'", $config);
         $this->assertStringContainsString("'primary'", $config);
         $this->assertStringContainsString("'accent'", $config);
         $this->assertStringContainsString("'text'", $config);
@@ -21,6 +21,6 @@ class DesignTokensTest extends TestCase
         $css = file_get_contents(base_path('resources/css/app.css'));
         $this->assertStringContainsString(':root', $css);
         $this->assertStringContainsString('--bg-100', $css);
-        $this->assertStringContainsString('#0F1C2E', $css);
+        $this->assertStringContainsString('#fffefb', $css);
     }
 }

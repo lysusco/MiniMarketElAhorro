@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AbonoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\AjusteController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\ClienteAbonosController;
 use App\Http\Controllers\ClienteCatalogoController;
@@ -12,6 +14,8 @@ use App\Http\Controllers\MovimientoInventarioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 
 // La raíz del sitio redirige según el rol del usuario autenticado.
@@ -65,12 +69,35 @@ Route::middleware(['auth', 'rol:admin,empleado'])->group(function () {
 
     Route::get('/movimientos', [MovimientoInventarioController::class, 'index'])->name('movimientos.index');
 
+    // Clientes y crédito (RF-12, RF-13): admin y empleado gestionan clientes;
+    // el límite de crédito solo lo define el administrador (se ignora si lo envía el empleado).
+    Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
+    Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+    Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
+    Route::get('/clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
+    Route::put('/clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
+    Route::patch('/clientes/{cliente}/toggle-activo', [ClienteController::class, 'toggleActivo'])->name('clientes.toggleActivo');
+
+    // Ventas de contado y fiadas (RF-14 a RF-18): registro y consulta para admin y empleado.
+    Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
+    Route::get('/ventas/create', [VentaController::class, 'create'])->name('ventas.create');
+    Route::post('/ventas', [VentaController::class, 'store'])->name('ventas.store');
+    Route::get('/ventas/{venta}', [VentaController::class, 'show'])->name('ventas.show');
+
+    // Abonos a ventas fiadas (RF-19, reglas 8, 9 y 10): registro para admin y empleado.
+    Route::get('/abonos/create', [AbonoController::class, 'create'])->name('abonos.create');
+    Route::post('/abonos', [AbonoController::class, 'store'])->name('abonos.store');
+
     // Gestionar categorías y productos es exclusivo del administrador (matriz de permisos).
     Route::middleware('rol:admin')->group(function () {
         Route::resource('categorias', CategoriaController::class)->except(['show']);
         Route::resource('proveedores', ProveedorController::class)
             ->parameters(['proveedores' => 'proveedor'])
             ->except(['show']);
+
+        // Reportes de ventas y cartera (RF-20): solo el administrador (matriz de permisos).
+        Route::get('/reportes/ventas', [ReporteController::class, 'ventas'])->name('reportes.ventas');
+        Route::get('/reportes/cartera', [ReporteController::class, 'cartera'])->name('reportes.cartera');
 
         Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
         Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');

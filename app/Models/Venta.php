@@ -12,6 +12,24 @@ class Venta extends Model
     use HasFactory;
 
     /**
+     * Tipos de venta.
+     * contado: se paga de inmediato (sin cliente asociado).
+     * fiado: queda pendiente de pago y acumula saldo en el cliente.
+     */
+    public const TIPO_CONTADO = 'contado';
+    public const TIPO_FIADO = 'fiado';
+
+    /**
+     * Estados de pago de la venta.
+     * pendiente: sin abonos (fiado).
+     * parcial: con abonos que no cubren el total.
+     * pagada: saldo pendiente en cero.
+     */
+    public const ESTADO_PENDIENTE = 'pendiente';
+    public const ESTADO_PARCIAL = 'parcial';
+    public const ESTADO_PAGADA = 'pagada';
+
+    /**
      * Los atributos que se pueden asignar masivamente.
      *
      * @var list<string>
@@ -87,7 +105,7 @@ class Venta extends Model
      */
     public function esFiada(): bool
     {
-        return $this->tipo_venta === 'fiado';
+        return $this->tipo_venta === self::TIPO_FIADO;
     }
 
     /**
@@ -96,5 +114,23 @@ class Venta extends Model
     public function saldoPendiente(): float
     {
         return (float) $this->total - (float) $this->abonos()->sum('monto');
+    }
+
+    /**
+     * Recalcula el estado de pago según los abonos registrados:
+     * cero abonos → pendiente, abonos parciales → parcial,
+     * saldo pendiente en cero → pagada.
+     */
+    public function actualizarEstadoPago(): void
+    {
+        $abonado = (float) $this->abonos()->sum('monto');
+
+        $estado = match (true) {
+            $abonado <= 0 => self::ESTADO_PENDIENTE,
+            round($this->saldoPendiente(), 2) <= 0 => self::ESTADO_PAGADA,
+            default => self::ESTADO_PARCIAL,
+        };
+
+        $this->update(['estado' => $estado]);
     }
 }

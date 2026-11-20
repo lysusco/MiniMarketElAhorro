@@ -22,7 +22,7 @@
                 <div class="bg-bg-200 border border-bg-300 overflow-hidden sm:rounded-lg">
                     <div class="p-5">
                         <div class="text-sm font-medium text-text-200">{{ __('Stock bajo') }}</div>
-                        <div class="mt-1 text-3xl font-semibold {{ $productosStockBajo > 0 ? 'text-red-400' : 'text-text-100' }}">
+                        <div class="mt-1 text-3xl font-semibold {{ $productosStockBajo > 0 ? 'text-red-700' : 'text-text-100' }}">
                             {{ $productosStockBajo }}
                         </div>
                         <div class="mt-1 text-xs text-text-200">{{ __('Productos en o bajo el mínimo') }}</div>
@@ -44,7 +44,7 @@
                 <div class="bg-bg-200 border border-bg-300 overflow-hidden sm:rounded-lg">
                     <div class="p-5">
                         <div class="text-sm font-medium text-text-200">{{ __('Cartera pendiente') }}</div>
-                        <div class="mt-1 text-3xl font-semibold {{ $carteraPendiente > 0 ? 'text-amber-400' : 'text-text-100' }}">
+                        <div class="mt-1 text-3xl font-semibold {{ $carteraPendiente > 0 ? 'text-amber-700' : 'text-text-100' }}">
                             ${{ number_format($carteraPendiente, 0, ',', '.') }}
                         </div>
                         <div class="mt-1 text-xs text-text-200">{{ __('Saldo fiado de los clientes') }}</div>
@@ -118,7 +118,7 @@
                                         <tr class="hover:bg-bg-300/40">
                                             <td class="py-2 pe-4 text-text-100">{{ $producto->nombre }}</td>
                                             <td class="py-2 pe-4 text-text-200">{{ $producto->categoria->nombre }}</td>
-                                            <td class="py-2 pe-4 text-end font-semibold text-red-400">{{ $producto->stock_actual }}</td>
+                                            <td class="py-2 pe-4 text-end font-semibold text-red-700">{{ $producto->stock_actual }}</td>
                                             <td class="py-2 pe-4 text-end text-text-200">{{ $producto->stock_minimo }}</td>
                                         </tr>
                                     @empty

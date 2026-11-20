@@ -83,12 +83,12 @@
                                         <td class="py-3 pe-4 text-text-200">{{ $producto->categoria?->nombre ?? '—' }}</td>
                                         <td class="py-3 pe-4 text-text-200 text-end">{{ number_format($producto->precio_venta, 2) }}</td>
                                         <td class="py-3 pe-4 text-end">
-                                            <span class="{{ $producto->enStockBajo() ? 'text-amber-300 font-medium' : 'text-text-200' }}">
+                                            <span class="{{ $producto->enStockBajo() ? 'text-amber-700 font-medium' : 'text-text-200' }}">
                                                 {{ $producto->stock_actual }} / {{ $producto->stock_minimo }}
                                             </span>
                                         </td>
                                         <td class="py-3 pe-4">
-                                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $producto->activo ? 'bg-green-900/40 text-green-300' : 'bg-bg-300 text-text-200' }}">
+                                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $producto->activo ? 'bg-green-100 text-green-700' : 'bg-bg-300 text-text-200' }}">
                                                 {{ $producto->activo ? __('Activo') : __('Inactivo') }}
                                             </span>
                                         </td>
