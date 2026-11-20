@@ -184,7 +184,7 @@
                             </div>
                             <div>
                                 <label class="block text-xs text-text-200 mb-1">{{ __('Cantidad') }}</label>
-                                <input type="number" min="1" x-model="current.cantidad"
+                                <input type="number" min="1" x-model.number="current.cantidad"
                                        class="bg-bg-100 border-bg-300 text-text-100 focus:border-accent-200 focus:ring-accent-200 rounded-md shadow-sm w-full" />
                             </div>
                             <div>
@@ -218,7 +218,7 @@
                                         <tr>
                                             <td class="py-3 pe-4 text-text-100" x-text="item.producto_nombre"></td>
                                             <td class="py-3 pe-4 text-end">
-                                                <input type="number" min="1" :name="'items['+index+'][cantidad]'" x-model="item.cantidad"
+                                                <input type="number" min="1" :name="'items['+index+'][cantidad]'" x-model.number="item.cantidad"
                                                        class="bg-bg-100 border-bg-300 text-text-100 rounded-md shadow-sm w-24 text-end" required />
                                             </td>
                                             <td class="py-3 pe-4 text-text-200 text-end" x-text="Number(item.precio_venta).toFixed(2)"></td>
@@ -358,7 +358,7 @@
                     );
 
                     if (existente) {
-                        existente.cantidad += cantidad;
+                        existente.cantidad = Number(existente.cantidad) + Number(cantidad);
                     } else {
                         this.items.push({
                             producto_id: this.current.producto_id,
