@@ -61,9 +61,6 @@
                     <x-responsive-nav-link :href="route('ajustes.index')" :active="request()->routeIs('ajustes.*')">
                         <span class="truncate" x-show="!collapsed">Ajustes</span>
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
-                        <span class="truncate" x-show="!collapsed">Clientes</span>
-                    </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('movimientos.index')" :active="request()->routeIs('movimientos.*')">
                         <span class="truncate" x-show="!collapsed">Movimientos</span>
                     </x-responsive-nav-link>
@@ -77,7 +74,9 @@
 
                 <div>
                     <p x-show="!collapsed" class="px-2 mb-1 text-[11px] uppercase tracking-wider text-text-200">Clientes</p>
-                    <x-coming-soon x-show="!collapsed">Clientes y crédito</x-coming-soon>
+                    <x-responsive-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
+                        <span class="truncate" x-show="!collapsed">Clientes y crédito</span>
+                    </x-responsive-nav-link>
                     <x-coming-soon x-show="!collapsed">Registrar abono</x-coming-soon>
                 </div>
             @endunless
