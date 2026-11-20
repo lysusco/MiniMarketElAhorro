@@ -199,7 +199,7 @@
                                             <td class="py-3 pe-4 text-end">
                                                 <input type="hidden" :name="'items['+index+'][producto_id]'" :value="item.producto_id" />
                                                 <button type="button" @click="removeItem(index)"
-                                                        class="text-red-400 hover:text-red-300 text-sm font-medium">
+                                                        class="text-red-700 hover:text-red-600 text-sm font-medium">
                                                     {{ __('Quitar') }}
                                                 </button>
                                             </td>
@@ -215,7 +215,7 @@
                         </div>
 
                         @if ($errors->has('items') || $errors->has('items.*'))
-                            <p class="mt-2 text-sm text-red-300">
+                            <p class="mt-2 text-sm text-red-700">
                                 {{ $errors->first('items') ?: $errors->first('items.*.producto_id') ?: $errors->first('items.*.cantidad') ?: $errors->first('items.*.costo_unitario') }}
                             </p>
                         @endif
@@ -228,7 +228,7 @@
                         <div class="bg-bg-200 border border-bg-300 rounded-lg shadow-xl p-6 w-full max-w-xs mx-auto">
                             <div class="flex justify-center mb-4">
                                 <div class="w-12 h-12 rounded-full bg-red-500/15 flex items-center justify-center">
-                                    <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-7 h-7 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                               d="M6 18L18 6M6 6l12 12" />
                                     </svg>

@@ -66,9 +66,9 @@
                                         <td class="py-3 pe-4">
                                             @php
                                                 $clase = match ($movimiento->tipo) {
-                                                    'entrada' => 'bg-green-900/40 text-green-300',
-                                                    'salida' => 'bg-blue-900/40 text-blue-300',
-                                                    default => 'bg-amber-900/40 text-amber-300',
+                                                    'entrada' => 'bg-green-100 text-green-700',
+                                                    'salida' => 'bg-blue-100 text-blue-700',
+                                                    default => 'bg-amber-100 text-amber-700',
                                                 };
                                             @endphp
                                             <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $clase }}">

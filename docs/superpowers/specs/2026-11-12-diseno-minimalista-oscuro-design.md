@@ -38,18 +38,18 @@ paleta proporcionada por el usuario, sin cambiar el stack (Tailwind + Blade).
 
 ## Tokens de diseño
 
-Colores (CSS variables):
+Colores (CSS variables) — paleta clara (Versión 1):
 
-- --primary-100: #1F3A5F (botones primarios, acento principal)
-- --primary-200: #4d648d
-- --primary-300: #acc2ef (texto sobre oscuro, enlaces activos)
-- --accent-100: #3D5A80
-- --accent-200: #cee8ff (alertas de atención/stock bajo)
-- --text-100: #FFFFFF
-- --text-200: #e0e0e0 (texto secundario)
-- --bg-100: #0F1C2E (fondo de página)
-- --bg-200: #1f2b3e (cards, navbar, tablas)
-- --bg-300: #374357 (bordes, divisores, hover)
+- --primary-100: #d4eaf7 (botones primarios, acento principal)
+- --primary-200: #b6ccd8
+- --primary-300: #3b3c3d (texto sobre claro, enlaces activos)
+- --accent-100: #71c4ef
+- --accent-200: #00668c (alertas de atención/stock bajo)
+- --text-100: #1d1c1c
+- --text-200: #313d44 (texto secundario)
+- --bg-100: #fffefb (fondo de página)
+- --bg-200: #f5f4f1 (cards, navbar, tablas)
+- --bg-300: #cccbc8 (bordes, divisores, hover)
 
 Tipografía: Figtree (400/500/600), heredada de Breeze.
 

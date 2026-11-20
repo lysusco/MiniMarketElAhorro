@@ -49,9 +49,9 @@
                                         <td class="py-3 pe-4">
                                             @php
                                                 $clase = match ($ajuste->estado) {
-                                                    \App\Models\Ajuste::ESTADO_ACTIVO => 'bg-green-900/40 text-green-300',
+                                                    \App\Models\Ajuste::ESTADO_ACTIVO => 'bg-green-100 text-green-700',
                                                     \App\Models\Ajuste::ESTADO_INACTIVO => 'bg-bg-300 text-text-200',
-                                                    default => 'bg-amber-900/40 text-amber-300',
+                                                    default => 'bg-amber-100 text-amber-700',
                                                 };
                                                 $label = match ($ajuste->estado) {
                                                     \App\Models\Ajuste::ESTADO_ACTIVO => 'Activo',
@@ -72,13 +72,13 @@
 
                                                 <form method="POST" action="{{ route('ajustes.finalizar', $ajuste) }}" class="inline ms-3">
                                                     @csrf
-                                                    <button type="submit" class="text-green-300 hover:text-green-200 font-medium">
+                                                    <button type="submit" class="text-green-700 hover:text-green-600 font-medium">
                                                         {{ __('Finalizar') }}
                                                     </button>
                                                 </form>
 
                                                 <button type="button" onclick="document.getElementById('inactivar-ajuste-{{ $ajuste->id }}').style.display='flex'"
-                                                        class="ms-3 text-amber-300 hover:text-amber-200 font-medium">
+                                                        class="ms-3 text-amber-700 hover:text-amber-600 font-medium">
                                                     {{ __('Inactivar') }}
                                                 </button>
 
@@ -88,7 +88,7 @@
                                                     <div class="bg-bg-200 border border-bg-300 rounded-lg shadow-xl p-6 w-full max-w-sm mx-auto">
                                                         <div class="flex justify-center mb-4">
                                                             <div class="w-12 h-12 rounded-full bg-amber-500/15 flex items-center justify-center">
-                                                                <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <svg class="w-7 h-7 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                                           d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0l-6.93 12c-.77 1.33.19 3 1.73 3z" />
                                                                 </svg>
@@ -118,7 +118,7 @@
                                                 </div>
                                             @elseif ($ajuste->estado === \App\Models\Ajuste::ESTADO_ACTIVO && auth()->user()->isAdmin())
                                                 <button type="button" onclick="document.getElementById('inactivar-ajuste-{{ $ajuste->id }}').style.display='flex'"
-                                                        class="text-amber-300 hover:text-amber-200 font-medium">
+                                                        class="text-amber-700 hover:text-amber-600 font-medium">
                                                     {{ __('Inactivar') }}
                                                 </button>
 
@@ -128,7 +128,7 @@
                                                     <div class="bg-bg-200 border border-bg-300 rounded-lg shadow-xl p-6 w-full max-w-sm mx-auto">
                                                         <div class="flex justify-center mb-4">
                                                             <div class="w-12 h-12 rounded-full bg-amber-500/15 flex items-center justify-center">
-                                                                <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <svg class="w-7 h-7 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                                           d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0l-6.93 12c-.77 1.33.19 3 1.73 3z" />
                                                                 </svg>

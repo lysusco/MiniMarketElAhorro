@@ -27,13 +27,13 @@
                                     <td class="py-2 pe-4 text-text-100">#{{ $venta->id }}</td>
                                     <td class="py-2 pe-4 text-text-200">{{ $venta->fecha->format('d/m/Y') }}</td>
                                     <td class="py-2 pe-4">
-                                        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $venta->tipo_venta === 'fiado' ? 'bg-amber-500/15 text-amber-400' : 'bg-green-500/15 text-green-400' }}">
+                                        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $venta->tipo_venta === 'fiado' ? 'bg-amber-500/15 text-amber-700' : 'bg-green-500/15 text-green-700' }}">
                                             {{ $venta->tipo_venta === 'fiado' ? __('Fiado') : __('Contado') }}
                                         </span>
                                     </td>
                                     <td class="py-2 pe-4 text-text-200">{{ $venta->estado }}</td>
                                     <td class="py-2 pe-4 text-text-100 text-end">${{ number_format($venta->total, 0, ',', '.') }}</td>
-                                    <td class="py-2 pe-4 text-end {{ $venta->saldoPendiente() > 0 ? 'text-amber-400' : 'text-text-200' }}">
+                                    <td class="py-2 pe-4 text-end {{ $venta->saldoPendiente() > 0 ? 'text-amber-700' : 'text-text-200' }}">
                                         ${{ number_format($venta->saldoPendiente(), 0, ',', '.') }}
                                     </td>
                                     <td class="py-2 pe-4 text-end">

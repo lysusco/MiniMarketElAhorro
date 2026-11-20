@@ -89,7 +89,7 @@
                                             <td class="py-3 pe-4 text-end">
                                                 <input type="hidden" :name="'items['+index+'][producto_id]'" :value="item.producto_id" />
                                                 <button type="button" @click="removeItem(index)"
-                                                        class="text-red-400 hover:text-red-300 text-sm font-medium">
+                                                        class="text-red-700 hover:text-red-600 text-sm font-medium">
                                                     {{ __('Quitar') }}
                                                 </button>
                                             </td>
@@ -105,7 +105,7 @@
                         </div>
 
                         @if ($errors->has('items') || $errors->has('items.*'))
-                            <p class="mt-2 text-sm text-red-300">
+                            <p class="mt-2 text-sm text-red-700">
                                 {{ $errors->first('items') ?: $errors->first('items.*.producto_id') ?: $errors->first('items.*.cantidad') }}
                             </p>
                         @endif

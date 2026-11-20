@@ -19,7 +19,7 @@
                 <div class="bg-bg-200 border border-bg-300 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-5">
                         <div class="text-sm font-medium text-text-200">{{ __('Saldo pendiente') }}</div>
-                        <div class="mt-1 text-3xl font-semibold {{ $cliente->saldo > 0 ? 'text-amber-400' : 'text-text-100' }}">
+                        <div class="mt-1 text-3xl font-semibold {{ $cliente->saldo > 0 ? 'text-amber-700' : 'text-text-100' }}">
                             ${{ number_format($cliente->saldo, 0, ',', '.') }}
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                                             </td>
                                             <td class="py-2 pe-4 text-text-200">{{ $venta->fecha->format('d/m/Y') }}</td>
                                             <td class="py-2 pe-4">
-                                                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $venta->tipo_venta === 'fiado' ? 'bg-amber-500/15 text-amber-400' : 'bg-green-500/15 text-green-400' }}">
+                                                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $venta->tipo_venta === 'fiado' ? 'bg-amber-500/15 text-amber-700' : 'bg-green-500/15 text-green-700' }}">
                                                     {{ $venta->tipo_venta === 'fiado' ? __('Fiado') : __('Contado') }}
                                                 </span>
                                             </td>

@@ -50,7 +50,7 @@
                                         <td class="py-3 pe-4 text-text-200">{{ $categoria->descripcion ?? '—' }}</td>
                                         <td class="py-3 pe-4 text-text-200 text-end">{{ $categoria->productos_count }}</td>
                                         <td class="py-3 pe-4">
-                                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $categoria->activo ? 'bg-green-900/40 text-green-300' : 'bg-bg-300 text-text-200' }}">
+                                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $categoria->activo ? 'bg-green-100 text-green-700' : 'bg-bg-300 text-text-200' }}">
                                                 {{ $categoria->activo ? __('Activa') : __('Inactiva') }}
                                             </span>
                                         </td>
