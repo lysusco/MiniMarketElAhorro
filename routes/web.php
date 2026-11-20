@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbonoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\AjusteController;
 use App\Http\Controllers\ClienteController;
@@ -81,6 +82,10 @@ Route::middleware(['auth', 'rol:admin,empleado'])->group(function () {
     Route::get('/ventas/create', [VentaController::class, 'create'])->name('ventas.create');
     Route::post('/ventas', [VentaController::class, 'store'])->name('ventas.store');
     Route::get('/ventas/{venta}', [VentaController::class, 'show'])->name('ventas.show');
+
+    // Abonos a ventas fiadas (RF-19, reglas 8, 9 y 10): registro para admin y empleado.
+    Route::get('/abonos/create', [AbonoController::class, 'create'])->name('abonos.create');
+    Route::post('/abonos', [AbonoController::class, 'store'])->name('abonos.store');
 
     // Gestionar categorías y productos es exclusivo del administrador (matriz de permisos).
     Route::middleware('rol:admin')->group(function () {

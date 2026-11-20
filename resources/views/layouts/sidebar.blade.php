@@ -81,7 +81,9 @@
                     <x-responsive-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
                         <span class="truncate" x-show="!collapsed">Clientes y crédito</span>
                     </x-responsive-nav-link>
-                    <x-coming-soon x-show="!collapsed">Registrar abono</x-coming-soon>
+                    <x-responsive-nav-link :href="route('abonos.create')" :active="request()->routeIs('abonos.*')">
+                        <span class="truncate" x-show="!collapsed">Registrar abono</span>
+                    </x-responsive-nav-link>
                 </div>
             @endunless
 

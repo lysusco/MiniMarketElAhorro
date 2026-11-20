@@ -113,6 +113,12 @@
                     @endif
 
                     <div class="flex flex-wrap items-center gap-3">
+                        @if ($venta->esFiada() && $venta->saldoPendiente() > 0)
+                            <a href="{{ route('abonos.create', ['venta' => $venta->id]) }}"
+                               class="inline-flex items-center px-4 py-2 bg-primary-100 text-text-100 text-sm font-medium rounded-md hover:bg-primary-200">
+                                {{ __('Registrar abono') }}
+                            </a>
+                        @endif
                         <a href="{{ route('ventas.index') }}"
                            class="inline-flex items-center px-4 py-2 bg-bg-200 border border-bg-300 text-sm font-medium rounded-md text-text-100 hover:bg-bg-300">
                             {{ __('Volver') }}
