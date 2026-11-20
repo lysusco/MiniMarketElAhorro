@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\AjusteController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\ClienteAbonosController;
 use App\Http\Controllers\ClienteCatalogoController;
@@ -64,6 +65,15 @@ Route::middleware(['auth', 'rol:admin,empleado'])->group(function () {
     Route::patch('/ajustes/{ajuste}/inactivar', [AjusteController::class, 'inactivar'])->name('ajustes.inactivar');
 
     Route::get('/movimientos', [MovimientoInventarioController::class, 'index'])->name('movimientos.index');
+
+    // Clientes y crédito (RF-12, RF-13): admin y empleado gestionan clientes;
+    // el límite de crédito solo lo define el administrador (se ignora si lo envía el empleado).
+    Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
+    Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+    Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
+    Route::get('/clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
+    Route::put('/clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
+    Route::patch('/clientes/{cliente}/toggle-activo', [ClienteController::class, 'toggleActivo'])->name('clientes.toggleActivo');
 
     // Gestionar categorías y productos es exclusivo del administrador (matriz de permisos).
     Route::middleware('rol:admin')->group(function () {
