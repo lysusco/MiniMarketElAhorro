@@ -255,6 +255,48 @@ class VentasTest extends TestCase
             ->assertSessionHasErrors('descuento');
     }
 
+    public function test_la_venta_de_contado_con_cliente_conserva_el_cliente(): void
+    {
+        $cliente = $this->cliente(['limite_credito' => 10000, 'saldo' => 0]);
+        $producto = $this->productoConStock(10);
+
+        $this->actingAs($this->admin())
+            ->post('/ventas', [
+                'fecha' => now()->toDateString(),
+                'tipo_venta' => 'contado',
+                'cliente_id' => $cliente->id,
+                'items' => [
+                    ['producto_id' => $producto->id, 'cantidad' => 1],
+                ],
+            ])
+            ->assertRedirect(route('ventas.index'));
+
+        $this->assertDatabaseHas('ventas', ['tipo_venta' => 'contado', 'estado' => 'pagada', 'cliente_id' => $cliente->id]);
+        // El contado no mueve el saldo del cliente.
+        $this->assertDatabaseHas('clientes', ['id' => $cliente->id, 'saldo' => 0]);
+    }
+
+    public function test_la_venta_fiada_no_puede_quedar_con_total_cero(): void
+    {
+        $cliente = $this->cliente(['limite_credito' => 10000, 'saldo' => 0]);
+        $producto = $this->productoConStock(10);
+
+        // Descuento igual al subtotal: la venta fiada quedaría sin deuda.
+        $this->actingAs($this->admin())
+            ->post('/ventas', [
+                'fecha' => now()->toDateString(),
+                'tipo_venta' => 'fiado',
+                'cliente_id' => $cliente->id,
+                'descuento' => 2000,
+                'items' => [
+                    ['producto_id' => $producto->id, 'cantidad' => 1],
+                ],
+            ])
+            ->assertSessionHasErrors('descuento');
+
+        $this->assertDatabaseCount('ventas', 0);
+    }
+
     public function test_el_empleado_puede_registrar_ventas(): void
     {
         $this->actingAs($this->empleado())

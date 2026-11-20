@@ -55,6 +55,10 @@ class VentaController extends Controller
             $cantidades[$productoId] = ($cantidades[$productoId] ?? 0) + (int) $item['cantidad'];
         }
 
+        // Orden determinista de bloqueo: evita deadlocks entre ventas
+        // concurrentes que comparten productos en órdenes distintos.
+        ksort($cantidades);
+
         DB::transaction(function () use ($request, $tipoVenta, $descuento, $cantidades) {
             // Bloquea los productos para que dos ventas simultáneas
             // no puedan vender el mismo stock dos veces (RF-15).
@@ -83,6 +87,14 @@ class VentaController extends Controller
             }
             $subtotal = round($subtotal, 2);
 
+            // En una venta fiada el descuento no puede igualar o superar el
+            // subtotal: la venta debe quedar con total > 0.
+            if ($tipoVenta === Venta::TIPO_FIADO && $descuento >= $subtotal) {
+                throw ValidationException::withMessages([
+                    'descuento' => 'El descuento no puede igualar o superar el subtotal en una venta fiada.',
+                ]);
+            }
+
             if ($descuento > $subtotal) {
                 throw ValidationException::withMessages([
                     'descuento' => 'El descuento no puede superar el subtotal.',
@@ -92,9 +104,11 @@ class VentaController extends Controller
             $total = round($subtotal - $descuento, 2);
 
             // En ventas fiadas se valida el cliente y su crédito (reglas 5 y 6).
+            // El bloqueo del cliente serializa la validación de crédito y la
+            // actualización de saldo entre ventas fiadas concurrentes.
             $cliente = null;
             if ($tipoVenta === Venta::TIPO_FIADO) {
-                $cliente = Cliente::findOrFail($request->cliente_id);
+                $cliente = Cliente::lockForUpdate()->findOrFail($request->cliente_id);
 
                 if (! $cliente->activo) {
                     throw ValidationException::withMessages([
@@ -114,7 +128,9 @@ class VentaController extends Controller
             }
 
             $venta = Venta::create([
-                'cliente_id' => $cliente?->id,
+                // En contado el cliente es opcional: si viene en la petición se
+                // conserva; solo el fiado mueve el saldo del cliente.
+                'cliente_id' => $request->cliente_id,
                 'user_id' => $request->user()->id,
                 'fecha' => $request->fecha,
                 'tipo_venta' => $tipoVenta,
