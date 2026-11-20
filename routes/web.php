@@ -14,6 +14,7 @@ use App\Http\Controllers\MovimientoInventarioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +94,10 @@ Route::middleware(['auth', 'rol:admin,empleado'])->group(function () {
         Route::resource('proveedores', ProveedorController::class)
             ->parameters(['proveedores' => 'proveedor'])
             ->except(['show']);
+
+        // Reportes de ventas y cartera (RF-20): solo el administrador (matriz de permisos).
+        Route::get('/reportes/ventas', [ReporteController::class, 'ventas'])->name('reportes.ventas');
+        Route::get('/reportes/cartera', [ReporteController::class, 'cartera'])->name('reportes.cartera');
 
         Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
         Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');

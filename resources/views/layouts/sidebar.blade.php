@@ -90,7 +90,12 @@
             @if ($user?->isAdmin())
                 <div>
                     <p x-show="!collapsed" class="px-2 mb-1 text-[11px] uppercase tracking-wider text-text-200">Sistema</p>
-                    <x-coming-soon x-show="!collapsed">Reportes</x-coming-soon>
+                    <x-responsive-nav-link :href="route('reportes.ventas')" :active="request()->routeIs('reportes.ventas')">
+                        <span class="truncate" x-show="!collapsed">Ventas</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('reportes.cartera')" :active="request()->routeIs('reportes.cartera')">
+                        <span class="truncate" x-show="!collapsed">Cartera</span>
+                    </x-responsive-nav-link>
                     <x-coming-soon x-show="!collapsed">Usuarios y roles</x-coming-soon>
                 </div>
             @endif
