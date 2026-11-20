@@ -185,6 +185,9 @@ class AbonosTest extends TestCase
                 'metodo_pago' => 'efectivo',
             ])
             ->assertSessionHasErrors('venta_id');
+
+        // Solo debe existir el abono previo legítimo que saldó la venta.
+        $this->assertDatabaseCount('abonos', 1);
     }
 
     public function test_el_monto_del_abono_debe_ser_mayor_que_cero(): void
