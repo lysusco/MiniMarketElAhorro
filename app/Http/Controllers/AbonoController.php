@@ -28,8 +28,9 @@ class AbonoController extends Controller
         $ventasCliente = collect();
         $advertencia = null;
 
-        $clientes = Cliente::where('activo', true)
-            ->where('saldo', '>', 0)
+        // Regla 13: desactivar impide nuevas operaciones, pero un cliente
+        // inactivo con deuda debe seguir siendo cobrable.
+        $clientes = Cliente::where('saldo', '>', 0)
             ->orderBy('nombre')
             ->get(['id', 'nombre', 'identificacion', 'saldo']);
 
