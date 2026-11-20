@@ -69,7 +69,9 @@ class ReportesTest extends TestCase
             ->assertSee('Venta #')
             ->assertSee('Venta #'.$ventaHoy->id)
             ->assertDontSee('Venta #'.$ventaAnterior->id)
-            ->assertSee('1,500');
+            ->assertSee('1,500')
+            // Los totales del rango excluyen ventas fuera del rango (900 + 1,500 = 2,400 sin filtrar).
+            ->assertDontSee('2,400');
 
         $this->actingAs($admin)
             ->get('/reportes/ventas')
