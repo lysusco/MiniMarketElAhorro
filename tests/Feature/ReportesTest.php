@@ -69,7 +69,7 @@ class ReportesTest extends TestCase
             ->assertSee('Venta #')
             ->assertSee('Venta #'.$ventaHoy->id)
             ->assertDontSee('Venta #'.$ventaAnterior->id)
-            ->assertSee('1500');
+            ->assertSee('1,500');
 
         $this->actingAs($admin)
             ->get('/reportes/ventas')
@@ -86,7 +86,7 @@ class ReportesTest extends TestCase
         $this->actingAs($this->admin())
             ->get('/reportes/cartera')
             ->assertOk()
-            ->assertSee('5000')
+            ->assertSee('5,000')
             ->assertDontSee('Cliente Sin Deuda');
     }
 
@@ -97,7 +97,7 @@ class ReportesTest extends TestCase
         $this->actingAs($this->admin())
             ->get('/reportes/cartera')
             ->assertOk()
-            ->assertSee('6000');
+            ->assertSee('6,000');
     }
 
     public function test_el_empleado_no_puede_ver_los_reportes(): void
@@ -132,6 +132,6 @@ class ReportesTest extends TestCase
         $this->actingAs($admin)
             ->get('/reportes/ventas')
             ->assertOk()
-            ->assertSee('5000');
+            ->assertSee('5,000');
     }
 }

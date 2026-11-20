@@ -34,15 +34,15 @@
                         </div>
                         <div class="bg-bg-100 border border-bg-300 rounded-md p-4">
                             <p class="text-xs uppercase tracking-wider text-text-200">{{ __('Total contado') }}</p>
-                            <p class="mt-1 text-lg font-semibold text-text-100">{{ number_format($totales['contado'], 2, '.', '') }}</p>
+                            <p class="mt-1 text-lg font-semibold text-text-100">{{ number_format($totales['contado'], 2) }}</p>
                         </div>
                         <div class="bg-bg-100 border border-bg-300 rounded-md p-4">
                             <p class="text-xs uppercase tracking-wider text-text-200">{{ __('Total fiado') }}</p>
-                            <p class="mt-1 text-lg font-semibold text-text-100">{{ number_format($totales['fiado'], 2, '.', '') }}</p>
+                            <p class="mt-1 text-lg font-semibold text-text-100">{{ number_format($totales['fiado'], 2) }}</p>
                         </div>
                         <div class="bg-bg-100 border border-bg-300 rounded-md p-4">
                             <p class="text-xs uppercase tracking-wider text-text-200">{{ __('Total del rango') }}</p>
-                            <p class="mt-1 text-lg font-semibold text-text-100">{{ number_format($totales['total'], 2, '.', '') }}</p>
+                            <p class="mt-1 text-lg font-semibold text-text-100">{{ number_format($totales['total'], 2) }}</p>
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@
                                                 {{ __($estadoLabel) }}
                                             </span>
                                         </td>
-                                        <td class="py-3 pe-4 text-text-200 text-end">{{ number_format($venta->total, 2, '.', '') }}</td>
+                                        <td class="py-3 pe-4 text-text-200 text-end">{{ number_format($venta->total, 2) }}</td>
                                     </tr>
                                 @empty
                                     <tr>

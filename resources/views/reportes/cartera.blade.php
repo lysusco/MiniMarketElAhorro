@@ -36,9 +36,9 @@
                                         <td class="py-3 pe-4 font-medium text-text-100">{{ $cliente->nombre }}</td>
                                         <td class="py-3 pe-4 text-text-200">{{ $cliente->identificacion }}</td>
                                         <td class="py-3 pe-4 text-text-200">{{ $cliente->telefono ?? '—' }}</td>
-                                        <td class="py-3 pe-4 text-text-200 text-end">{{ number_format($cliente->limite_credito, 2, '.', '') }}</td>
-                                        <td class="py-3 pe-4 text-text-100 text-end">{{ number_format($cliente->saldo, 2, '.', '') }}</td>
-                                        <td class="py-3 pe-4 text-text-200 text-end">{{ number_format($cliente->creditoDisponible(), 2, '.', '') }}</td>
+                                        <td class="py-3 pe-4 text-text-200 text-end">{{ number_format($cliente->limite_credito, 2) }}</td>
+                                        <td class="py-3 pe-4 text-text-100 text-end">{{ number_format($cliente->saldo, 2) }}</td>
+                                        <td class="py-3 pe-4 text-text-200 text-end">{{ number_format($cliente->creditoDisponible(), 2) }}</td>
                                         <td class="py-3 pe-4 text-text-200 text-end">{{ $cliente->ventas_con_saldo_pendiente }}</td>
                                     </tr>
                                 @empty
