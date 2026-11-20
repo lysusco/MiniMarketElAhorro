@@ -13,6 +13,7 @@ use App\Http\Controllers\MovimientoInventarioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 
 // La raíz del sitio redirige según el rol del usuario autenticado.
@@ -74,6 +75,12 @@ Route::middleware(['auth', 'rol:admin,empleado'])->group(function () {
     Route::get('/clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
     Route::put('/clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
     Route::patch('/clientes/{cliente}/toggle-activo', [ClienteController::class, 'toggleActivo'])->name('clientes.toggleActivo');
+
+    // Ventas de contado y fiadas (RF-14 a RF-18): registro y consulta para admin y empleado.
+    Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
+    Route::get('/ventas/create', [VentaController::class, 'create'])->name('ventas.create');
+    Route::post('/ventas', [VentaController::class, 'store'])->name('ventas.store');
+    Route::get('/ventas/{venta}', [VentaController::class, 'show'])->name('ventas.show');
 
     // Gestionar categorías y productos es exclusivo del administrador (matriz de permisos).
     Route::middleware('rol:admin')->group(function () {

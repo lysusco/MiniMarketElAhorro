@@ -68,8 +68,12 @@
 
                 <div>
                     <p x-show="!collapsed" class="px-2 mb-1 text-[11px] uppercase tracking-wider text-text-200">Ventas</p>
-                    <x-coming-soon x-show="!collapsed">Nueva venta</x-coming-soon>
-                    <x-coming-soon x-show="!collapsed">Historial</x-coming-soon>
+                    <x-responsive-nav-link :href="route('ventas.create')" :active="request()->routeIs('ventas.create')">
+                        <span class="truncate" x-show="!collapsed">Nueva venta</span>
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index', 'ventas.show')">
+                        <span class="truncate" x-show="!collapsed">Historial</span>
+                    </x-responsive-nav-link>
                 </div>
 
                 <div>
